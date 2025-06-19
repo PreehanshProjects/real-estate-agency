@@ -9,9 +9,19 @@ export default function ContactForm() {
     message: "",
   });
 
+  const [focusedInput, setFocusedInput] = useState(null);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleFocus = (name) => {
+    setFocusedInput(name);
+  };
+
+  const handleBlur = () => {
+    setFocusedInput(null);
   };
 
   const handleSubmit = (e) => {
@@ -19,6 +29,22 @@ export default function ContactForm() {
     alert("Message sent!");
     setFormData({ name: "", email: "", phone: "", message: "" });
   };
+
+  const inputs = [
+    { icon: FaUser, name: "name", type: "text", placeholder: "Your Name" },
+    {
+      icon: FaEnvelope,
+      name: "email",
+      type: "email",
+      placeholder: "Email Address",
+    },
+    {
+      icon: FaPhoneAlt,
+      name: "phone",
+      type: "tel",
+      placeholder: "Phone Number (optional)",
+    },
+  ];
 
   return (
     <form
@@ -29,24 +55,14 @@ export default function ContactForm() {
         Get in Touch
       </h3>
 
-      {/* Form Fields */}
-      {[
-        { icon: FaUser, name: "name", type: "text", placeholder: "Your Name" },
-        {
-          icon: FaEnvelope,
-          name: "email",
-          type: "email",
-          placeholder: "Email Address",
-        },
-        {
-          icon: FaPhoneAlt,
-          name: "phone",
-          type: "tel",
-          placeholder: "Phone Number (optional)",
-        },
-      ].map(({ icon: Icon, name, type, placeholder }) => (
+      {/* Inputs */}
+      {inputs.map(({ icon: Icon, name, type, placeholder }) => (
         <div key={name} className="relative">
-          <Icon className="absolute left-3 top-3.5 text-blue-500" />
+          <Icon
+            className={`absolute left-3 top-3.5 transition-colors duration-300 ${
+              focusedInput === name ? "text-blue-700" : "text-blue-500"
+            }`}
+          />
           <input
             type={type}
             name={name}
@@ -54,6 +70,8 @@ export default function ContactForm() {
             onChange={handleChange}
             placeholder={placeholder}
             required={name !== "phone"}
+            onFocus={() => handleFocus(name)}
+            onBlur={handleBlur}
             className="pl-10 pr-4 py-2 w-full rounded-xl bg-white/40 text-gray-800 placeholder-gray-500 shadow-inner border border-white/50 focus:outline-none focus:ring-2 focus:ring-blue-500 backdrop-blur-sm transition"
           />
         </div>
@@ -61,18 +79,23 @@ export default function ContactForm() {
 
       {/* Message */}
       <div className="relative">
-        <FaCommentDots className="absolute left-3 top-3 text-blue-500" />
+        <FaCommentDots
+          className={`absolute left-3 top-3 transition-colors duration-300 ${
+            focusedInput === "message" ? "text-blue-700" : "text-blue-500"
+          }`}
+        />
         <textarea
           name="message"
           value={formData.message}
           onChange={handleChange}
           rows={4}
           placeholder="Your Message"
+          onFocus={() => handleFocus("message")}
+          onBlur={handleBlur}
           className="pl-10 pr-4 pt-2 pb-2 w-full rounded-xl bg-white/40 text-gray-800 placeholder-gray-500 shadow-inner border border-white/50 focus:outline-none focus:ring-2 focus:ring-blue-500 backdrop-blur-sm transition resize-none"
         />
       </div>
 
-      {/* Button */}
       <button
         type="submit"
         className="w-full bg-blue-600 text-white py-2 rounded-xl hover:bg-blue-700 transition font-semibold shadow-md"
