@@ -3,13 +3,17 @@ import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import { FaPhone, FaEnvelope, FaHome, FaClock } from "react-icons/fa";
 import "leaflet/dist/leaflet.css";
 
+// Ensure map resizes properly even on mobile resize
 function ForceResizeMap() {
   const map = useMap();
 
   useEffect(() => {
-    setTimeout(() => {
-      map.invalidateSize();
-    }, 200); // delay ensures container is fully sized
+    const handleResize = () => map.invalidateSize();
+
+    setTimeout(handleResize, 300); // delay ensures container is visible
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
   }, [map]);
 
   return null;
@@ -19,12 +23,12 @@ export default function HowToFindUs() {
   const position = [-20.309606, 57.484902];
 
   return (
-    <section className="max-w-4xl mx-auto my-16 p-8 bg-white/90 rounded-3xl shadow-xl border border-gray-200">
+    <section className="max-w-6xl mx-auto my-16 p-6 sm:p-8 bg-white/90 rounded-3xl shadow-xl border border-gray-200">
       <h2 className="text-3xl font-bold text-blue-700 mb-8 text-center">
         How To Find Us
       </h2>
 
-      <div className="flex flex-col md:flex-row gap-10">
+      <div className="flex flex-col lg:flex-row gap-10">
         {/* Contact Info */}
         <div className="flex-1 space-y-6 text-gray-800">
           <div className="flex items-center gap-3">
@@ -60,7 +64,7 @@ export default function HowToFindUs() {
         </div>
 
         {/* Map */}
-        <div className="flex-1 h-[500px] rounded-xl overflow-hidden shadow-lg border border-gray-300">
+        <div className="flex-1 h-[300px] sm:h-[400px] md:h-[500px] w-full rounded-xl overflow-hidden shadow-lg border border-gray-300">
           <MapContainer
             center={position}
             zoom={16}
