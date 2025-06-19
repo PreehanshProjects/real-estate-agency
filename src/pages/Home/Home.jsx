@@ -1,6 +1,5 @@
 import PropertyCards from "./PropertyCards";
 import Expertise from "./Expertise";
-import InfoRow from "./InfoRow";
 import ContactForm from "./ContactForm";
 
 export default function Home() {
@@ -8,7 +7,6 @@ export default function Home() {
     <main className="max-w-7xl mx-auto px-6 py-10 space-y-16">
       <PropertyCards />
       <Expertise />
-      <InfoRow />
       <section className="flex flex-col md:flex-row gap-8">
         <div className="flex-1">
           <h2 className="text-xl font-semibold mb-4">

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { FaUser, FaEnvelope, FaPhoneAlt, FaCommentDots } from "react-icons/fa";
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
@@ -15,7 +16,6 @@ export default function ContactForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Add your submit logic here (e.g., API call)
     alert("Message sent!");
     setFormData({ name: "", email: "", phone: "", message: "" });
   };
@@ -23,54 +23,70 @@ export default function ContactForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-white p-6 rounded shadow-md w-full max-w-md sticky top-10 self-start"
+      className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md sticky top-10 self-start space-y-6"
     >
-      <h3 className="text-lg font-semibold mb-4">Contact Us</h3>
-      <label className="block mb-2">
-        Name
+      <h3 className="text-2xl font-bold text-gray-800 text-center mb-4">
+        Get in Touch
+      </h3>
+
+      {/* Name */}
+      <div className="relative">
+        <FaUser className="absolute top-3.5 left-3 text-gray-400" />
         <input
           type="text"
           name="name"
           value={formData.name}
           onChange={handleChange}
+          placeholder="Your Name"
           required
-          className="mt-1 w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600"
+          className="pl-10 pr-4 py-2 w-full border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
         />
-      </label>
-      <label className="block mb-2">
-        Email
+      </div>
+
+      {/* Email */}
+      <div className="relative">
+        <FaEnvelope className="absolute top-3.5 left-3 text-gray-400" />
         <input
           type="email"
           name="email"
           value={formData.email}
           onChange={handleChange}
+          placeholder="Email Address"
           required
-          className="mt-1 w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600"
+          className="pl-10 pr-4 py-2 w-full border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
         />
-      </label>
-      <label className="block mb-2">
-        Phone
+      </div>
+
+      {/* Phone */}
+      <div className="relative">
+        <FaPhoneAlt className="absolute top-3.5 left-3 text-gray-400" />
         <input
           type="tel"
           name="phone"
           value={formData.phone}
           onChange={handleChange}
-          className="mt-1 w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600"
+          placeholder="Phone Number (optional)"
+          className="pl-10 pr-4 py-2 w-full border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
         />
-      </label>
-      <label className="block mb-4">
-        Message
+      </div>
+
+      {/* Message */}
+      <div className="relative">
+        <FaCommentDots className="absolute top-3 left-3 text-gray-400" />
         <textarea
           name="message"
           value={formData.message}
           onChange={handleChange}
+          placeholder="Your Message"
           rows={4}
-          className="mt-1 w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600"
+          className="pl-10 pr-4 pt-2 w-full border rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
         />
-      </label>
+      </div>
+
+      {/* Submit Button */}
       <button
         type="submit"
-        className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
+        className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition font-semibold"
       >
         Send Message
       </button>
