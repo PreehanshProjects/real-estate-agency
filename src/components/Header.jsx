@@ -66,7 +66,9 @@ export default function Header() {
               </a>
             </div>
           </div>
-
+          <Link to="/map" className="text-gray-700 hover:text-blue-600">
+            Map
+          </Link>
           <Link to="/contact" className="text-gray-700 hover:text-blue-600">
             Contact Us
           </Link>
@@ -177,6 +179,13 @@ export default function Header() {
             onClick={() => setMenuOpen(false)}
           >
             Contact Us
+          </Link>
+          <Link
+            to="/map"
+            className="block px-6 py-3 text-gray-700 hover:bg-gray-100"
+            onClick={() => setMenuOpen(false)}
+          >
+            Map
           </Link>
         </nav>
       )}
