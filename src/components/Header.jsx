@@ -115,20 +115,22 @@ export default function Header() {
       {/* Mobile Menu */}
       {menuOpen && (
         <nav className="md:hidden bg-white border-t border-gray-200 shadow-md">
-          <a
-            href="#"
+          <Link
+            to="/"
             className="block px-6 py-3 text-gray-700 hover:bg-gray-100"
+            onClick={() => setMenuOpen(false)}
           >
             Home
-          </a>
-          <a
-            href="#"
+          </Link>
+          <Link
+            to="/about"
             className="block px-6 py-3 text-gray-700 hover:bg-gray-100"
+            onClick={() => setMenuOpen(false)}
           >
             About the Agency
-          </a>
+          </Link>
 
-          {/* Mobile dropdown menu for All Properties */}
+          {/* Dropdown not functional here — optional: keep it or simplify */}
           <details className="group px-6 py-3 border-t border-gray-200">
             <summary className="flex justify-between items-center cursor-pointer text-gray-700 hover:bg-gray-100">
               All Properties
@@ -169,12 +171,13 @@ export default function Header() {
             </div>
           </details>
 
-          <a
-            href="#"
+          <Link
+            to="/contact"
             className="block px-6 py-3 text-gray-700 hover:bg-gray-100"
+            onClick={() => setMenuOpen(false)}
           >
             Contact Us
-          </a>
+          </Link>
         </nav>
       )}
     </header>
