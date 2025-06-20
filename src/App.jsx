@@ -6,6 +6,7 @@ import Contact from "./pages/Contact/Contact";
 import Footer from "./components/Footer";
 import Map from "./components/Map";
 import PropertyDetail from "./pages/PropertyDetail/PropertyDetail";
+import "leaflet/dist/leaflet.css";
 
 export default function App() {
   return (
